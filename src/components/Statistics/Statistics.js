@@ -1,5 +1,6 @@
 import styles from "./Statistics.module.css";
 import PropTypes from "prop-types";
+import Notification from "../Notification/Notification";
 
 const Statistics = ({
   good,
@@ -7,9 +8,9 @@ const Statistics = ({
   bad,
   totalFeedback,
   positiveFeedbackPercent,
-}) => {
-  return (
-    <div className="wrapper">
+}) => (
+  <div className="wrapper">
+    {good || neutral || bad ? (
       <ul>
         <li key="good" className={styles.item}>
           <span>Good: {good}</span>
@@ -31,9 +32,11 @@ const Statistics = ({
           <span>Positive feedback: {positiveFeedbackPercent} %</span>
         </li>
       </ul>
-    </div>
-  );
-};
+    ) : (
+      <Notification message={"No feedback given"} />
+    )}
+  </div>
+);
 
 Statistics.propTypes = {
   good: PropTypes.number.isRequired,
